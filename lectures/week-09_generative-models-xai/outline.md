@@ -40,11 +40,10 @@ By the end of week 09 students can:
   (for XAI) are both trained in-notebook, briefly. 4 exercises.
 - **Session B** (`week09_b_generative-models-xai_*`): dataset = ESOL SMILES
   strings (character sequences, Week 08A's tokenisation extended with
-  `<start>`/`<end>`). Guarded Colab install (RDKit is not preinstalled on
-  Colab) + reduced local training-epoch fallback, per the Weeks 08-09
-  Colab-compatibility requirement. 3 exercises + mini-challenge.
-- Compute budget: Session A < 10 s; Session B ~30-40 s locally (40 epochs,
-  reduced from a Colab default of 80).
+  `<start>`/`<end>`). Reduced training-epoch budget (`N_EPOCHS=40`) to keep
+  training-from-scratch laptop-CPU-friendly (course runs on Jupyter locally;
+  no Colab path). 3 exercises + mini-challenge.
+- Compute budget: Session A < 10 s; Session B ~30-40 s locally (40 epochs).
 
 ## Slides plan
 - Session A ~8 slides: VAE architecture; reparameterisation; ELBO; latent
@@ -90,7 +89,8 @@ By the end of week 09 students can:
 - Session B's char-RNN reaches roughly 80% validity at `temperature=0.7`
   after 40 epochs (~31 s) in local testing — confirm this level of polish is
   sufficient for a first generative-chemistry exposure, or whether a longer
-  training budget (Colab-only) should be the headline number instead.
+  local training budget (more epochs, still laptop-CPU-only) should be the
+  headline number instead.
 - No pretrained generative model (e.g. a public SMILES-VAE checkpoint) is
   used — Session B trains entirely from scratch in-session, which keeps the
   notebook self-contained but means generation quality is modest compared to

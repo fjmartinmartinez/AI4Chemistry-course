@@ -22,11 +22,10 @@
    the start of each session and the `_solutions.ipynb` after it (protects
    the exercises), or release both together. §4 assumes staggered release;
    change it if you'd rather release both at once.
-3. **Create a GitHub repository for the course materials** if you want
-   "Open in Colab" links (§4) — required for Weeks 08–09, which need a
-   guarded pip-install/Colab path anyway. `[PLACEHOLDER: GITHUB_REPO_URL]`
-   appears everywhere a badge link needs it; a single find-and-replace once
-   the repo exists will wire up every week.
+3. ~~Create a GitHub repository for the course materials~~ — done
+   (`https://github.com/fjmartinmartinez/AI4Chemistry-course`). All ten
+   weeks run as Jupyter notebooks in the local `ai4chem` environment; there
+   is no Google Colab path, so no "Open in Colab" badges are needed.
 4. **Fill in the placeholders**: `[MODULE CODE]`, `[ACADEMIC YEAR]`,
    `[SESSION A DAY/TIME]`, `[SESSION B DAY/TIME]`, `[ROOM/LOCATION]`,
    `[SUBMISSION DEADLINE]`, `[PRESENTATION SLOT]`.
@@ -122,8 +121,8 @@
 | 5 | Deep learning I: tensors, MLPs, PyTorch | Train an MLP; loss curves, early stopping |
 | 6 | Representations & inductive bias | Representation shoot-out — **mini-project assigned** |
 | 7 | Graph neural networks | GNN lab; compare to Week 5's MLP |
-| 8 | Sequences & attention; chemical LLMs | Pretrained transformer for property prediction *(Colab)* |
-| 9 | Generative models (VAE); explainability (XAI) | Generative RNN lab; sample & assess validity *(Colab)* |
+| 8 | Sequences & attention; chemical LLMs | Pretrained transformer for property prediction |
+| 9 | Generative models (VAE); explainability (XAI) | Generative RNN lab; sample & assess validity |
 | 10 | Frontier applications & pitfalls | **Mini-project hackathon + presentations** |
 
 `[PLACEHOLDER]`: add calendar dates once term dates are confirmed.
@@ -143,20 +142,16 @@
 ### 1.6 Software and setup
 *(paste into a "Getting started" page/section)*
 
-> This module runs entirely in **Jupyter notebooks**. Two ways to work:
->
-> **Option A — your own laptop (recommended for Weeks 1–7, 10).**
-> Install the course environment once:
+> This module runs entirely in **Jupyter notebooks**, on your own laptop —
+> no Google Colab. Install the course environment once:
 > ```
 > conda env create -f env/environment.yml
 > conda activate ai4chem
 > jupyter lab
 > ```
-> **Option B — Google Colab (no install; required for Weeks 8–9).**
-> Every notebook from Week 8 onward includes a guarded setup cell that
-> installs anything Colab is missing automatically — just open the notebook
-> link and run the first cell. Colab also works for every other week if you'd
-> rather not install anything locally.
+> This same environment covers every week, including Weeks 8–9's pretrained
+> transformer and from-scratch generative model — both are sized to run
+> comfortably on a laptop CPU.
 >
 > **New to programming entirely?** Do the optional **Week 0 primer** first
 > (self-study, ungraded, no installation needed — runs anywhere Python 3 does).
@@ -237,25 +232,21 @@ objective tags refer to `admin/learning-outcomes.md`.
 - Files: `week07_a_graph-neural-networks_student.ipynb`,
   `week07_b_graph-neural-networks_student.ipynb` (+ solutions)
 
-### Week 8 — Sequences, attention and chemical language models · *(Colab, Session B)*
+### Week 8 — Sequences, attention and chemical language models
 > **Session A**: SMILES as sequences, the attention mechanism from first
 > principles, and a survey of chemical language models. **Session B**: load
 > a real pretrained chemical transformer and use it for property
-> prediction — runs on Colab or locally. *(LO7)*
+> prediction, in the course's own Jupyter environment. *(LO7)*
 - Files: `week08_a_sequences-attention_student.ipynb`,
   `week08_b_sequences-attention_student.ipynb` (+ solutions)
-- `[PLACEHOLDER]`: add the Colab badge for Session B once the GitHub repo
-  exists (§4).
 
-### Week 9 — Generative models and explainability · *(Colab, Session B)*
+### Week 9 — Generative models and explainability
 > **Session A**: variational autoencoders, a real generative failure mode,
 > and explaining predictions (gradient saliency, integrated gradients).
 > **Session B**: train your own generative model for SMILES and assess what
 > it produces — validity, uniqueness, novelty. *(LO7, LO8)*
 - Files: `week09_a_generative-models-xai_student.ipynb`,
   `week09_b_generative-models-xai_student.ipynb` (+ solutions)
-- `[PLACEHOLDER]`: add the Colab badge for Session B once the GitHub repo
-  exists (§4).
 
 ### Week 10 — Frontier applications, pitfalls, and the hackathon
 > **Session A**: a GNN on a real DFT-computed property, modern
@@ -271,11 +262,12 @@ objective tags refer to `admin/learning-outcomes.md`.
 ## 3. Notebook access strategy
 
 **Recommendation**: upload every `.ipynb` directly to KEATS as a File
-resource (works immediately, no dependency on anything external) **and**
-set up a GitHub repository so every notebook also gets an "Open in Colab"
-badge — not optional for Weeks 8–9 (they need Colab's install path), and a
-nice-to-have everywhere else so students without a working local
-environment are never blocked.
+resource. All ten weeks run in the same local Jupyter environment
+(`env/environment.yml`) — no Google Colab path, so no "Open in Colab"
+badges are needed; the GitHub repository
+(`https://github.com/fjmartinmartinez/AI4Chemistry-course`) exists as a
+source-control backup and for your own reference, not as a student-facing
+access route.
 
 **Release timing**: recommend releasing `_student.ipynb` at the start of
 each session and `_solutions.ipynb` 24–48 h after Session B closes, so the
@@ -283,18 +275,6 @@ each session and `_solutions.ipynb` 24–48 h after Session B closes, so the
 generated together from the same source (`lectures/_build/nbbuild.py`), so
 they never diverge — releasing them at different times is a scheduling
 choice only, not a content-consistency risk.
-
-### Colab badge template
-*(paste into a notebook's KEATS description, or as an HTML label above the
-file resource — once `[PLACEHOLDER: GITHUB_REPO_URL]` is filled in)*
-
-```html
-<a href="https://colab.research.google.com/github/[GITHUB_REPO_URL]/blob/main/lectures/week-08_sequences-attention/notebook/week08_b_sequences-attention_student.ipynb">
-  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open in Colab">
-</a>
-```
-Swap the path after `/blob/main/` for each notebook; the pattern is always
-`lectures/week-NN_<topic>/notebook/<filename>.ipynb`.
 
 ---
 
@@ -376,9 +356,9 @@ and placeholders to fill in.)*
 > Week 1 starts from variables and loops.
 >
 > **Before Session 1, please:**
-> 1. Install the course software environment (instructions and a Colab
->    alternative are on the module's "Getting started" page), **or** confirm
->    you can access Google Colab in a browser.
+> 1. Install the course software environment (instructions are on the
+>    module's "Getting started" page) — the whole module runs on your own
+>    laptop; there is no Google Colab component.
 > 2. If you have **never written any code before, in any language**,
 >    complete the optional **Week 0 primer** first — it's about 50 minutes,
 >    ungraded, and needs no installation at all. If you've coded before

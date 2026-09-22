@@ -17,19 +17,13 @@ C += [md(r'''
 ## Workshop: a generative RNN for SMILES — sample and assess validity
 
 **Course:** AI for Chemistry · **Session:** 09B (hands-on workshop, 2.0 h) ·
-**Runtime:** ~30-40 s on laptop CPU (40 training epochs locally); a Colab GPU
-runtime comfortably affords more epochs (default 80 there).
-
-### ⚠️ Colab compatibility
-RDKit is **not** preinstalled on Google Colab (unlike this course's own
-`ai4chem` environment). Section 0 installs it, guarded, only when needed, and
-picks a training-epoch budget appropriate to the runtime.
+**Runtime:** ~30-40 s on laptop CPU (40 training epochs).
 
 ### Suggested timing (solo study, ~120 min)
 
 | Section | Topic | Time |
 |--------:|-------|-----:|
-| 0 | Setup: guarded install, tokeniser, reduced-epoch fallback | 10 min |
+| 0 | Setup: tokeniser, training-epoch budget | 10 min |
 | 1 | Training a character-level generative RNN | 20 min |
 | 2 | Sampling and assessing validity | 20 min |
 | 3 | Temperature: the validity/diversity trade-off | 20 min |
@@ -59,25 +53,14 @@ notebook.
 # ==========================================================================
 C += [md(r'''
 ---
-## 0. Setup: guarded install, tokeniser, reduced-epoch fallback
+## 0. Setup: tokeniser, training-epoch budget
 
-**What to look for:** `RDKit available: True`; `N_EPOCHS = 40` locally (`80`
-on Colab); a vocabulary including `<start>`/`<end>` marker tokens alongside
-Week 08A's character set.
+**What to look for:** `RDKit available: True`; `N_EPOCHS = 40`; a vocabulary
+including `<start>`/`<end>` marker tokens alongside Week 08A's character
+set.
 ''')]
 
 C += [code(r'''
-import sys
-import subprocess
-
-IN_COLAB = "google.colab" in sys.modules
-
-if IN_COLAB:
-    print("Running on Google Colab -- installing rdkit and transformers-free deps if needed.")
-    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "rdkit"], check=True)
-else:
-    print("Running locally (course ai4chem environment) -- rdkit already installed.")
-
 try:
     import rdkit
     print("RDKit available:", True, " version", rdkit.__version__)
@@ -104,7 +87,7 @@ SEED = 0xC0FFEE
 np.random.seed(SEED)
 torch.manual_seed(SEED)
 
-N_EPOCHS = 80 if IN_COLAB else 40      # reduced-size CPU fallback (see markdown above)
+N_EPOCHS = 40      # keeps training comfortably inside a laptop CPU's session budget
 print(f"N_EPOCHS = {N_EPOCHS}")
 
 ROOT = Path.cwd()
@@ -141,10 +124,6 @@ C += [md(r'''
 >   disjoint from every real SMILES character — reusing a real character
 >   (e.g. `"^"` if it somehow appeared in a SMILES string) would corrupt both
 >   the marker and the real token.
-> - Running on Colab **without** a GPU runtime selected — `N_EPOCHS = 80`
->   would then take proportionally longer than the CPU-only local default;
->   select a GPU runtime (Runtime -> Change runtime type) if training feels
->   slow on Colab.
 ''')]
 
 C += checkpoint(
@@ -158,11 +137,12 @@ print("Section 0 OK")
     expected="Prints `Section 0 OK`. Padding index is 0; every sequence is "
     "padded to the same length.",
     questions=r'''
-1. Why does the local fallback reduce **epochs** rather than, say, reducing
-   the dataset size (as Week 08B did with `N_MAX`)?
-2. What is the risk of leaving `IN_COLAB` undetected (e.g. a Colab update
-   changes how the runtime identifies itself) and always falling back to the
-   local, smaller `N_EPOCHS`?
+1. Why does this notebook budget **epochs** (`N_EPOCHS`) rather than, say,
+   the dataset size (as Week 08B did with `N_MAX`), to keep training
+   laptop-friendly?
+2. Why do `<start>`/`<end>` need their own reserved vocabulary slots,
+   disjoint from every real SMILES character, rather than reusing an
+   existing rare one?
 ''',
     answers=r'''
 1. Training data volume (~1000 SMILES) is already small and cheap to use in
@@ -170,11 +150,11 @@ print("Section 0 OK")
    over a padded sequence, so trading epochs (which scale training time
    directly) is the more natural lever than trading how much of an already-
    small dataset to use.
-2. The notebook would simply run the smaller, laptop-friendly configuration
-   everywhere, including on Colab — a safe direction to fail in (slightly
-   less polished generation results, not a crash), which is why this guard
-   pattern checks `sys.modules` directly rather than relying on something
-   more fragile like an environment variable a user must set manually.
+2. A real SMILES character could coincide with whatever symbol is chosen as
+   a marker (e.g. `"^"`), which would corrupt both the marker's meaning and
+   that character's meaning — reserving disjoint slots guarantees
+   `<start>`/`<end>` are unambiguous regardless of what appears in the
+   training SMILES.
 ''',
 )
 
@@ -759,9 +739,8 @@ C += [md(r'''
 ---
 ## Summary — what you learned
 
-- A **guarded install + reduced-epoch fallback** pattern for a
-  training-from-scratch (not just inference) notebook that must run on both
-  Colab and a laptop CPU.
+- A **reduced-epoch budget** pattern for a training-from-scratch (not just
+  inference) notebook that runs comfortably on a laptop CPU.
 - A **character-level generative RNN**, trained with teacher forcing on
   exactly the autoregressive objective Week 08A defined, then actually
   **sampled** — temperature-controlled, one character at a time.

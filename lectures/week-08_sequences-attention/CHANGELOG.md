@@ -26,3 +26,16 @@
   Slide figures (shared `slides/figures/`): `attention_weights_toy.png`,
   `causal_mask.png` (A); `chembert_embedding_pca.png`,
   `chembert_attention_heatmap.png`, `chembert_vs_leaderboard.png` (B).
+- 2026-09-22: removed Session B's Google Colab compatibility path (course
+  decision: all workshops run as Jupyter notebooks in the `ai4chem`
+  environment; Colab is not used). Dropped the `IN_COLAB` detection and
+  guarded `pip install` for `transformers` (already a pinned dependency);
+  `N_MAX` is now a fixed 400-molecule working set rather than a
+  Colab-vs-local conditional — no change to the executed/verified local
+  behaviour, since 400 was already the local-path value. Updated
+  `build_week08_b.py` and both `week08_b_*.ipynb` variants (source cells
+  and one stale stdout line only; all other stored outputs unchanged) and
+  `outline.md`. Edited in a container without the `ai4chem` environment
+  available, so **not** re-verified with a fresh `nbconvert --execute`
+  pass — `TODO(verify)`: run `Restart & Run All` before next use to
+  confirm.

@@ -25,4 +25,4 @@ Assumes NO prior programming. Core text from week 4: dmol.pub (Deep Learning for
 - Mini-project (wk 06→10): **sole summative assessment, 100% of module weight**, in two equally-weighted parts — Part 1 (50%): the technical notebook; Part 2 (50%): write-up + Week 10 hackathon presentation. Confirmed by instructor 2026-09-22; full brief and rubric in `assessments/mini-project-brief.md`.
 
 ## Environment
-- Weeks 1–7 run in `env/environment.yml` on laptops; weeks 7–9 notebooks need Colab (free GPU) fallbacks — keep both paths per CLAUDE.md standards.
+- All 10 weeks run as Jupyter notebooks in `env/environment.yml`, on students' own laptops — no Google Colab. Weeks 08–09's heavier notebooks (a pretrained transformer; training a generative model from scratch) use a reduced-size working set/epoch budget to stay laptop-CPU-friendly, per CLAUDE.md standards.
