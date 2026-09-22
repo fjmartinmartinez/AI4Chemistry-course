@@ -1,0 +1,73 @@
+<h3>About this module</h3>
+<p>This module gives you a practical, hands-on introduction to machine learning and deep learning as applied to chemistry &mdash; from your first line of Python through to graph neural networks, chemical language models and generative molecular design. No prior programming experience is assumed: Week 1 starts from variables and loops and builds up, session by session, to the methods used in current AI-for-chemistry research.</p>
+<p>Every session is <strong>notebook-driven</strong>. Session A (2.5&nbsp;h) interleaves short concept blocks with guided notebook work; Session B (2.0&nbsp;h) is a hands-on workshop applying that week's ideas to a real chemical dataset, ending in a short debrief. All notebooks are <strong>self-guided</strong>: read the markdown cell before every code cell, run it, check your answer against the stated &ldquo;what to look for&rdquo;, and use the built-in &ldquo;Check yourself&rdquo; cells to confirm you're on track before moving on.</p>
+
+<h3>Module aims</h3>
+<p>This module aims to:</p>
+<ol>
+  <li>Equip you with practical programming and data-analysis skills, starting from <strong>no prior programming experience</strong>, sufficient to read, clean and critically analyse real chemical data.</li>
+  <li>Introduce the core methodology of machine learning &mdash; from classical regression and classification through to deep learning &mdash; grounded throughout in chemical datasets and chemically meaningful evaluation, not taught as abstract computer science.</li>
+  <li>Develop fluency with the molecular representations and model architectures used in current AI-for-chemistry research (descriptors, fingerprints, graph neural networks, sequence/attention models, generative models), including working directly with pretrained models.</li>
+  <li>Build critical judgement about the reliability of AI-driven chemical predictions &mdash; data leakage, benchmark and metric choice, representation bias, and the limits of explainability &mdash; so you use these tools critically, not as an unquestioned &ldquo;black box&rdquo;.</li>
+  <li>Give you direct, first-hand experience of the end-to-end AI-for-chemistry research workflow (data &rarr; representation &rarr; model &rarr; evaluation &rarr; critique) through a self-directed mini-project on a real chemical dataset.</li>
+</ol>
+
+<h3>Learning outcomes</h3>
+<p>On successful completion of this module, you will be able to:</p>
+<ol>
+  <li><strong>Program in Python for chemical data</strong> &mdash; read, transform and visualise chemical data files, from no prior programming experience.</li>
+  <li><strong>Represent molecules computationally</strong> &mdash; SMILES, RDKit, molecular descriptors and fingerprints, and build a clean, ML-ready dataset.</li>
+  <li><strong>Apply the supervised ML workflow correctly</strong> &mdash; train/validation/test splitting, cross-validation, over/under-fitting, and choosing the right metric for the task.</li>
+  <li><strong>Build and evaluate classical ML models</strong> &mdash; regression, classification, clustering and PCA for molecular property prediction and analysis.</li>
+  <li><strong>Implement neural networks</strong> &mdash; tensors, layers, backpropagation; train and regularise your own models in PyTorch.</li>
+  <li><strong>Reason about representation and inductive bias</strong> &mdash; fixed vs learned features, sequences vs graphs, invariance and equivariance.</li>
+  <li><strong>Use modern architectures for chemistry</strong> &mdash; graph neural networks, attention/transformers and generative models, including pretrained models.</li>
+  <li><strong>Assess reliability and deliver a study</strong> &mdash; data leakage, benchmark choice, explainability, reproducibility, and a complete end-to-end mini-project.</li>
+</ol>
+
+<h3>Weekly schedule</h3>
+<table border="1" cellpadding="6" cellspacing="0" style="border-collapse:collapse; width:100%;">
+  <thead>
+    <tr>
+      <th>Week</th>
+      <th>Session A (2.5&nbsp;h)</th>
+      <th>Session B (2.0&nbsp;h)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>0 <em>(optional, before Week 1)</em></td><td>&mdash;</td><td>Python primer (self-study, ungraded)</td></tr>
+    <tr><td>1</td><td>Python bootcamp I</td><td>NumPy + matplotlib workshop</td></tr>
+    <tr><td>2</td><td>pandas; molecules in code (SMILES, RDKit)</td><td>Build a clean molecular dataset</td></tr>
+    <tr><td>3</td><td>First ML: regression &amp; model assessment</td><td>Solubility-prediction lab; leaderboard</td></tr>
+    <tr><td>4</td><td>Classification + unsupervised learning</td><td>Toxicity classification mini-competition</td></tr>
+    <tr><td>5</td><td>Deep learning I: tensors, MLPs, PyTorch</td><td>Train an MLP; loss curves, early stopping</td></tr>
+    <tr><td>6</td><td>Representations &amp; inductive bias</td><td>Representation shoot-out &mdash; <strong>mini-project assigned</strong></td></tr>
+    <tr><td>7</td><td>Graph neural networks</td><td>GNN lab; compare to Week 5's MLP</td></tr>
+    <tr><td>8</td><td>Sequences &amp; attention; chemical LLMs</td><td>Pretrained transformer for property prediction <em>(Colab)</em></td></tr>
+    <tr><td>9</td><td>Generative models (VAE); explainability (XAI)</td><td>Generative RNN lab; sample &amp; assess validity <em>(Colab)</em></td></tr>
+    <tr><td>10</td><td>Frontier applications &amp; pitfalls</td><td><strong>Mini-project hackathon + presentations</strong></td></tr>
+  </tbody>
+</table>
+<p><em>[PLACEHOLDER: add calendar dates once term dates are confirmed]</em></p>
+
+<h3>Assessment overview</h3>
+<ul>
+  <li><strong>Weekly notebook exercises</strong> &mdash; formative, auto-checked with <code>assert</code> statements as you go; not submitted or marked, but the same checks a marker would use to confirm a technique works.</li>
+  <li><strong>Mini-project</strong> &mdash; the module's <strong>sole summative assessment (100%)</strong>, assigned Week 6, presented/submitted Week 10, in two equally-weighted parts:
+    <ul>
+      <li><strong>Part 1 (50%)</strong> &mdash; the technical notebook (data hygiene, representations, models, evaluation, error analysis).</li>
+      <li><strong>Part 2 (50%)</strong> &mdash; the write-up and Week 10 hackathon presentation (critical discussion and communication).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Software and setup</h3>
+<p>This module runs entirely in <strong>Jupyter notebooks</strong>. Two ways to work:</p>
+<p><strong>Option A &mdash; your own laptop (recommended for Weeks 1&ndash;7, 10).</strong><br>
+Install the course environment once:</p>
+<pre><code>conda env create -f env/environment.yml
+conda activate ai4chem
+jupyter lab</code></pre>
+<p><strong>Option B &mdash; Google Colab (no install; required for Weeks 8&ndash;9).</strong><br>
+Every notebook from Week 8 onward includes a guarded setup cell that installs anything Colab is missing automatically &mdash; just open the notebook link and run the first cell. Colab also works for every other week if you'd rather not install anything locally.</p>
+<p><strong>New to programming entirely?</strong> Do the optional <strong>Week 0 primer</strong> first (self-study, ungraded, no installation needed &mdash; runs anywhere Python 3 does).</p>

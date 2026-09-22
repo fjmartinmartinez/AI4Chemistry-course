@@ -134,11 +134,11 @@
 > - **Weekly notebook exercises** — formative, auto-checked with `assert`
 >   statements as you go; not submitted or marked, but the same checks a
 >   marker would use to confirm a technique works.
-> - **Mini-project** — assigned Week 6, presented/submitted Week 10.
->   Weight: `TODO(verify)` (syllabus range 40–60%; see
->   `assessments/mini-project-brief.md`).
-> - **Remaining weight**: `TODO(verify)` against the approved module spec
->   (coursework/exam component, if any).
+> - **Mini-project** — the module's **sole summative assessment (100%)**,
+>   assigned Week 6, presented/submitted Week 10, in two equally-weighted
+>   parts: **Part 1 (50%)** the technical notebook; **Part 2 (50%)** the
+>   write-up and Week 10 hackathon presentation. See
+>   `assessments/mini-project-brief.md` for the full brief and rubric.
 
 ### 1.6 Software and setup
 *(paste into a "Getting started" page/section)*
