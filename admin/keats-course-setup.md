@@ -156,6 +156,19 @@
 > **New to programming entirely?** Do the optional **Week 0 primer** first
 > (self-study, ungraded, no installation needed — runs anywhere Python 3 does).
 
+### 1.7 Module staff
+*(paste into the module's "Staff"/"Contacts" block)*
+
+> **Module lecturer**
+> Fran Martin-Martinez, Senior Lecturer, Computational Chemistry &
+> Statistical Thermodynamics, King's College London.
+> Email: `[PLACEHOLDER: LECTURER_EMAIL]` · Office: `[PLACEHOLDER: LECTURER_OFFICE]` ·
+> Office hours: `[PLACEHOLDER: LECTURER_OFFICE_HOURS]`
+>
+> **Teaching assistant**
+> Anderson Arboleda.
+> Email: `[PLACEHOLDER: TA_EMAIL]` · Office hours: `[PLACEHOLDER: TA_OFFICE_HOURS]`
+
 ---
 
 ## 2. Weekly KEATS section/topic text
@@ -389,6 +402,7 @@ and placeholders to fill in.)*
 | §1.3 Learning outcomes | `admin/learning-outcomes.md` (DRAFT) |
 | §1.4 Weekly schedule | `admin/syllabus.md` |
 | §1.5 Assessment overview | `admin/syllabus.md` + `assessments/mini-project-brief.md` |
+| §1.7 Module staff | none — entered directly here; not yet backed by a source-of-truth file |
 | §2 Weekly summaries | Each week's `lectures/week-NN_*/outline.md` |
 | §4 Mini-project | `assessments/mini-project-brief.md` (DRAFT) |
 
