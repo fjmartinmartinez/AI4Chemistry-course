@@ -1,0 +1,17 @@
+name: ai4chem
+channels: [conda-forge]
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - scikit-learn
+  - jupyterlab
+  - rdkit
+  - seaborn
+  - pip
+  - pip:
+      - torch  # CPU build is sufficient for teaching
+      - transformers>=4.40,<5  # week 08+: loading pretrained chemical language models (e.g. ChemBERTa)
+# Add every new notebook dependency here in the same change (see CLAUDE.md).
