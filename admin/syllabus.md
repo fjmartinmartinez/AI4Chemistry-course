@@ -20,10 +20,9 @@ Assumes NO prior programming. Core text from week 4: dmol.pub (Deep Learning for
 ## Deliberate scope cuts (from dmol.pub)
 - Kernel learning: qualitative only (wk 04). Equivariant NNs: conceptual only (wk 06), no implementation. Normalizing flows: survey slide only (wk 09).
 
-## Assessment skeleton (TBC)
-- Weekly notebook exercises (formative, auto-checked with asserts).
-- Mini-project (wk 06→10): small end-to-end study on a chemical dataset; ~40–60%.
-- Remaining weight: coursework/exam per module spec — align in learning-outcomes.md.
+## Assessment skeleton
+- Weekly notebook exercises (formative, auto-checked with asserts; no summative weight).
+- Mini-project (wk 06→10): **sole summative assessment, 100% of module weight**, in two equally-weighted parts — Part 1 (50%): the technical notebook; Part 2 (50%): write-up + Week 10 hackathon presentation. Confirmed by instructor 2026-09-22; full brief and rubric in `assessments/mini-project-brief.md`.
 
 ## Environment
 - Weeks 1–7 run in `env/environment.yml` on laptops; weeks 7–9 notebooks need Colab (free GPU) fallbacks — keep both paths per CLAUDE.md standards.
