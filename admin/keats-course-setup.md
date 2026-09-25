@@ -383,14 +383,20 @@ and placeholders to fill in.)*
 > self-guided — read the text before each code cell, run it, and use the
 > built-in "Check yourself" cells to confirm your answer before moving on.
 >
-> **Assessment**: weekly notebook exercises are formative (not submitted);
-> the assessed component is a mini-project, assigned in Week 6 and
-> presented in Week 10 — more detail nearer the time.
+> **Assessment**: weekly notebook exercises are formative and not submitted.
+> The module's only assessed component is a mini-project — assigned in
+> Week 6, presented in Week 10 — worth 100% of your mark, in two
+> equally-weighted parts: a technical notebook, and a write-up with
+> presentation. Full detail nearer the time.
+>
+> **Any questions**, get in touch:
+> Fran Martin-Martinez (Module Lecturer) — `[PLACEHOLDER: LECTURER_EMAIL]`
+> Anderson Arboleda (Teaching Assistant) — `[PLACEHOLDER: TA_EMAIL]`
 >
 > Looking forward to working with you.
 >
 > — Fran Martin-Martinez
-> `[MODULE CODE]`, `[ACADEMIC YEAR]`
+> `7CKIMCML`, `[ACADEMIC YEAR]`
 
 ---
 
