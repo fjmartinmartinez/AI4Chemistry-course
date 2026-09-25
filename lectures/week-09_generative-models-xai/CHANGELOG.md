@@ -22,3 +22,18 @@
   `generated_property_distribution.png` (B). No new environment dependencies
   beyond `transformers` (already added Week 08) and `rdkit` (already in
   `env/environment.yml`; only newly *guarded* for Colab in this notebook).
+- 2026-09-22: removed Session B's Google Colab compatibility path (course
+  decision: all workshops run as Jupyter notebooks in the `ai4chem`
+  environment; Colab is not used). Dropped the `IN_COLAB` detection and
+  guarded `pip install` for `rdkit` (already a pinned conda dependency);
+  `N_EPOCHS` is now a fixed value of 40 rather than a Colab-vs-local
+  conditional — no change to the executed/verified local behaviour, since
+  40 was already the local-path value. Replaced the now-moot "why guard
+  against Colab" conceptual question with one on the `<start>`/`<end>`
+  reserved-vocabulary-slot design already covered in the Common errors box.
+  Updated `build_week09_b.py` and both `week09_b_*.ipynb` variants (source
+  cells and one stale stdout line only; all other stored outputs
+  unchanged) and `outline.md`. Edited in a container without the
+  `ai4chem` environment available, so **not** re-verified with a fresh
+  `nbconvert --execute` pass — `TODO(verify)`: run `Restart & Run All`
+  before next use to confirm.

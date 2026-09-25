@@ -17,20 +17,17 @@ C += [md(r'''
 ## Workshop: a pretrained chemical transformer for property prediction
 
 **Course:** AI for Chemistry · **Session:** 08B (hands-on workshop, 2.0 h) ·
-**Runtime:** < 60 s on laptop CPU (`N_MAX=400` molecules); comfortably fits
-the same budget with the full dataset on a Colab GPU runtime.
+**Runtime:** < 60 s on laptop CPU (`N_MAX=400` molecules).
 
-### ⚠️ Colab compatibility
 This notebook downloads a ~180 MB pretrained model on first run (needs
-network access) and installs `transformers` if it is not already present —
-guarded so the same notebook runs unchanged on Google Colab or on the course
-laptop environment. See **Section 0**.
+network access). `transformers` is already installed in the course's
+`ai4chem` environment (`env/environment.yml`). See **Section 0**.
 
 ### Suggested timing (solo study, ~120 min)
 
 | Section | Topic | Time |
 |--------:|-------|-----:|
-| 0 | Setup: guarded install, load ChemBERTa, reduced-size fallback | 12 min |
+| 0 | Setup: load ChemBERTa, reduced-size working set | 12 min |
 | 1 | Subword vs character tokenisation | 15 min |
 | 2 | Extracting frozen embeddings | 15 min |
 | 3 | Chemical space from a pretrained embedding | 15 min |
@@ -39,8 +36,8 @@ laptop environment. See **Section 0**.
 | 6 | Exercises (3) + mini-challenge | 28 min |
 
 ### Learning objectives
-1. Load a pretrained chemical language model (ChemBERTa) with `transformers`,
-   with a Colab-compatible guarded install. *(LO7)*
+1. Load a pretrained chemical language model (ChemBERTa) with `transformers`.
+   *(LO7)*
 2. Contrast subword (BPE) tokenisation with Week 08A's character-level
    tokenisation. *(LO7)*
 3. Use a **frozen** pretrained model's embeddings for property prediction,
@@ -59,37 +56,18 @@ notebook.
 # ==========================================================================
 C += [md(r'''
 ---
-## 0. Setup: guarded install, load ChemBERTa, reduced-size fallback
+## 0. Setup: load ChemBERTa, reduced-size working set
 
-Two things make this notebook different from every previous one:
+This notebook uses a **reduced-size working set (`N_MAX`)**: extracting
+embeddings for every molecule from a transformer is far more expensive
+per-molecule than computing an RDKit descriptor. Capping the working set
+keeps Section 2's embedding extraction comfortably inside a laptop CPU's
+session budget.
 
-1. **A guarded pip install.** On Google Colab, `transformers` is not
-   preinstalled by default; on this course's own `ai4chem` environment it
-   already is (`env/environment.yml`). The cell below installs it only if
-   missing, and only announces Colab explicitly if detected — the same
-   notebook file runs unchanged in both places.
-2. **A reduced-size fallback (`N_MAX`).** Extracting embeddings for every
-   molecule from a transformer is far more expensive per-molecule than
-   computing an RDKit descriptor. We cap the working set locally so a laptop
-   CPU still finishes comfortably inside the session; on a Colab GPU runtime
-   the full dataset fits the same time budget, so we lift the cap there.
-
-**What to look for:** `Using device: cpu` (or `cuda` on a GPU runtime);
-`N_MAX = 400` locally.
+**What to look for:** `Using device: cpu`; `N_MAX = 400`.
 ''')]
 
 C += [code(r'''
-import sys
-import subprocess
-
-if "google.colab" in sys.modules:
-    print("Running on Google Colab -- installing transformers if needed.")
-    subprocess.run([sys.executable, "-m", "pip", "install", "-q",
-                    "transformers>=4.40,<5"], check=True)
-else:
-    print("Running locally (course ai4chem environment) -- transformers "
-          "should already be installed via env/environment.yml.")
-
 try:
     import transformers  # noqa: F401
     print("transformers", transformers.__version__)
@@ -126,8 +104,7 @@ np.random.seed(SEED)
 torch.manual_seed(SEED)
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-IN_COLAB = "google.colab" in sys.modules
-N_MAX = 1117 if IN_COLAB else 400          # reduced-size CPU fallback (see markdown above)
+N_MAX = 400          # keeps embedding extraction inside a laptop CPU's session budget
 print(f"Using device: {DEVICE}   N_MAX = {N_MAX}")
 
 ROOT = Path.cwd()
@@ -173,23 +150,23 @@ C += checkpoint(
     "Section 0",
     check=r'''
 assert N_MAX == len(sub) == len(smiles_list)
-assert not IN_COLAB or N_MAX == 1117           # only meaningful to check when actually on Colab
 assert chembert_model.training is False
 print("Section 0 OK")
 ''',
     expected="Prints `Section 0 OK`. `N_MAX` matches the working subsample "
     "size, and the model is in evaluation (not training) mode.",
     questions=r'''
-1. Why guard the `pip install` on `"google.colab" in sys.modules` rather than
-   simply running `pip install transformers` unconditionally at the top of
-   every notebook?
+1. Why is `N_MAX` capped at 400 molecules rather than using the full
+   1117-molecule ESOL set?
 2. What would go wrong if you forgot to call `chembert_model.eval()`?
 ''',
     answers=r'''
-1. Running `pip install` unconditionally works but is slow and unnecessary
-   every time on a machine that already has the right version installed
-   (the course laptop environment); guarding it keeps local runs fast while
-   still making the notebook self-sufficient on a fresh Colab runtime.
+1. Extracting a transformer embedding for every molecule means a full
+   forward pass through a 44M-parameter model, far more expensive than
+   computing a handful of closed-form RDKit descriptors. Capping the working
+   set keeps Section 2's embedding extraction comfortably inside a laptop
+   CPU's session budget without changing anything about how frozen-embedding
+   property prediction works.
 2. Layers that behave differently in train vs eval mode (dropout, batch
    normalisation — Week 05's *Standard layers* material) would use their
    *training-time* behaviour (e.g. randomly dropping activations), making
@@ -810,9 +787,8 @@ C += [md(r'''
 ---
 ## Summary — what you learned
 
-- A **guarded install + reduced-size (`N_MAX`) fallback** pattern that keeps
-  a notebook using a real pretrained model runnable on both Colab and a
-  laptop CPU.
+- A **reduced-size working set (`N_MAX`)** pattern that keeps a notebook
+  using a real pretrained model runnable comfortably on a laptop CPU.
 - **Subword (BPE) tokenisation**, and how it compresses a SMILES string
   compared to Week 08A's character-level tokenisation.
 - Extracting **frozen** embeddings from a pretrained chemical transformer,

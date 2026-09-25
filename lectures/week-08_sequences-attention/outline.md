@@ -45,12 +45,11 @@ By the end of week 08 students can:
 - **Session B** (`week08_b_sequences-attention_*`): loads
   `seyonec/ChemBERTa-zinc-base-v1` (44M-parameter RoBERTa-style model
   pretrained on ~ZINC SMILES) via `transformers`, frozen (no fine-tuning —
-  keeps runtime laptop-appropriate). Guarded Colab install cell +
-  reduced-size (`N_MAX`) local fallback, per course-wide Weeks 08-09
-  requirement. 3 exercises + mini-challenge.
+  keeps runtime laptop-appropriate). Reduced-size (`N_MAX`) working set to
+  keep embedding extraction laptop-CPU-friendly (course runs on Jupyter
+  locally; no Colab path). 3 exercises + mini-challenge.
 - Compute budget: Session A < 10 s; Session B ~15-30 s locally
-  (`N_MAX=400` molecules; full 1117 comfortably fits the same budget on a
-  Colab GPU runtime).
+  (`N_MAX=400` molecules).
 
 ## Slides plan
 - Session A ~8 slides: SMILES tokenisation; attention Q/K/V; seq2vec
@@ -100,9 +99,10 @@ By the end of week 08 students can:
   pretrained checkpoint, so this dependency is load-bearing, not optional.
   Confirm network access to Hugging Face Hub is available where the course is
   taught (first run downloads a small model, ~180 MB).
-- Session B's local `N_MAX=400` reduced-size fallback is a demonstration of
-  the required Colab-compatibility pattern; our own CPU timing showed the
-  full 1117-molecule ESOL set actually runs in well under a minute on a
-  laptop CPU too (frozen inference only, no fine-tuning) — confirm whether to
-  keep the reduction anyway (as an explicit teaching example of the pattern)
-  or widen `N_MAX` now that laptop timing is confirmed comfortable.
+- Our own CPU timing showed the full 1117-molecule ESOL set actually runs
+  in well under a minute on a laptop CPU (frozen inference only, no
+  fine-tuning) — `N_MAX=400` is kept as a deliberately smaller working set
+  regardless, since Section 2's point is teaching the reduced-size-working-
+  set pattern itself; confirm whether to keep the reduction or widen `N_MAX`
+  to the full dataset, now that laptop timing is confirmed comfortable
+  either way.
